@@ -59,6 +59,29 @@ func (fb *fizzbuzz) FizzBuzz(n int) string {
 	return fmt.Sprint(answerList)
 }
 
+func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizzbuzz {
+	if fzbz == nil {
+		fzbz = func(i int) bool {
+			return false
+		}
+	}
+	if fz == nil {
+		fzbz = func(i int) bool {
+			return false
+		}
+	}
+	if bz == nil {
+		fzbz = func(int) bool {
+			return false
+		}
+	}
+	return fizzbuzz{
+		fzbz: fzbz,
+		fz:   fz,
+		bz:   fz,
+	}
+}
+
 func main() {
 	fb := FizzBuzzClassic{}
 	fmt.Println(fb.Fizz(20))
