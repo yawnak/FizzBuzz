@@ -29,13 +29,13 @@ func (FizzBuzzClassic) FizzBuzz(i int) string {
 	return strconv.Itoa(i)
 }
 
-type fizzbuzz struct {
+type FizzBuzzModular struct {
 	fzbz func(int) bool
 	fz   func(int) bool
 	bz   func(int) bool
 }
 
-func (fb *fizzbuzz) FizzBuzz(i int) string {
+func (fb FizzBuzzModular) FizzBuzz(i int) string {
 	if fb.fzbz(i) {
 		return FizzBuzz
 	} else if fb.fz(i) {
@@ -46,7 +46,7 @@ func (fb *fizzbuzz) FizzBuzz(i int) string {
 	return strconv.Itoa(i)
 }
 
-func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizzbuzz {
+func NewFizzBuzzModular(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) FizzBuzzModular {
 	if fzbz == nil {
 		fzbz = func(i int) bool {
 			return false
@@ -62,7 +62,7 @@ func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizz
 			return false
 		}
 	}
-	return fizzbuzz{
+	return FizzBuzzModular{
 		fzbz: fzbz,
 		fz:   fz,
 		bz:   bz,
@@ -86,7 +86,7 @@ func main() {
 	fb := FizzBuzzClassic{}
 	resClassic := fb.FizzBuzz(n)
 
-	fb2 := NewFizzBuzz(fzbzClassic, fzClassic, bzClassic)
+	fb2 := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
 	res2 := fb2.FizzBuzz(n)
 
 	fmt.Println(resClassic)
