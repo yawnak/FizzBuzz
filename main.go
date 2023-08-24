@@ -36,3 +36,8 @@ func (FizzBuzzClassic) Fizz(n int) string {
 	}
 	return fmt.Sprint(answerList)
 }
+
+func main() {
+	fb := FizzBuzzClassic{}
+	fmt.Println(fb.Fizz(20))
+}
