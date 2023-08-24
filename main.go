@@ -103,14 +103,17 @@ func NewIncrementalFizzBuzzIterator(fb FizzBuzzer) IncrementalFizzBuzzIterator {
 	}
 }
 
+var (
+	n int
+)
+
 func main() {
-	n := 15
-	fb := FizzBuzzClassic{}
-	resClassic := fb.FizzBuzz(n)
+	flag.IntVar(&n, "n", 0, "input n, default 0")
+	flag.Parse()
 
-	fb2 := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
-	res2 := fb2.FizzBuzz(n)
+	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
+	fbIncremental := NewIncrementalFizzBuzzIterator(fb)
+	answer := fbIncremental.Iterate(n)
 
-	fmt.Println(resClassic)
-	fmt.Println(res2)
+	fmt.Println(strings.Join(answer, ","))
 }
