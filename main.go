@@ -78,7 +78,7 @@ func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizz
 	return fizzbuzz{
 		fzbz: fzbz,
 		fz:   fz,
-		bz:   fz,
+		bz:   bz,
 	}
 }
 
