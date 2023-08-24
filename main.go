@@ -6,3 +6,8 @@ const (
 	FizzBuzz = "FizzBuzz"
 )
 
+type FizzBuzzer interface {
+	Fizz(n int) string
+}
+
+
