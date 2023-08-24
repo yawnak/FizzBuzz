@@ -18,23 +18,15 @@ type FizzBuzzer interface {
 type FizzBuzzClassic struct {
 }
 
-func (FizzBuzzClassic) Fizz(n int) string {
-	answerList := make([]string, 0, n)
-	for i := 1; i <= n; i++ {
-		var answer string
-		if i%15 == 0 {
-			answer = FizzBuzz
-		} else if i%3 == 0 {
-			answer = Fizz
-		} else if i%5 == 0 {
-			answer = Buzz
-		} else {
-			answer = strconv.Itoa(i)
-		}
-		answerList = append(answerList, answer)
-		answer = ""
+func (FizzBuzzClassic) Fizz(i int) string {
+	if i%15 == 0 {
+		return FizzBuzz
+	} else if i%3 == 0 {
+		return Fizz
+	} else if i%5 == 0 {
+		return Buzz
 	}
-	return fmt.Sprint(answerList)
+	return strconv.Itoa(i)
 }
 
 type fizzbuzz struct {
@@ -43,20 +35,15 @@ type fizzbuzz struct {
 	bz   func(int) bool
 }
 
-func (fb *fizzbuzz) Fizz(n int) string {
-	answerList := make([]string, 0, n)
-	for i := 1; i <= n; i++ {
-		if fb.fzbz(i) {
-			answerList = append(answerList, FizzBuzz)
-		} else if fb.fz(i) {
-			answerList = append(answerList, Fizz)
-		} else if fb.bz(i) {
-			answerList = append(answerList, Buzz)
-		} else {
-			answerList = append(answerList, strconv.Itoa(i))
-		}
+func (fb *fizzbuzz) Fizz(i int) string {
+	if fb.fzbz(i) {
+		return FizzBuzz
+	} else if fb.fz(i) {
+		return Fizz
+	} else if fb.bz(i) {
+		return Buzz
 	}
-	return fmt.Sprint(answerList)
+	return strconv.Itoa(i)
 }
 
 func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizzbuzz {
