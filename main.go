@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 const (
