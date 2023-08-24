@@ -96,5 +96,11 @@ func bzClassic(i int) bool {
 
 func main() {
 	fb := FizzBuzzClassic{}
-	fmt.Println(fb.Fizz(20))
+	resClassic := fb.Fizz(20)
+
+	fb2 := NewFizzBuzz(fzbzClassic, fzClassic, bzClassic)
+	res2 := fb2.Fizz(20)
+
+	fmt.Println(resClassic)
+	fmt.Println(res2)
 }
