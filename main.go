@@ -12,13 +12,13 @@ const (
 )
 
 type FizzBuzzer interface {
-	Fizz(n int) string
+	FizzBuzz(n int) string
 }
 
 type FizzBuzzClassic struct {
 }
 
-func (FizzBuzzClassic) Fizz(i int) string {
+func (FizzBuzzClassic) FizzBuzz(i int) string {
 	if i%15 == 0 {
 		return FizzBuzz
 	} else if i%3 == 0 {
@@ -35,7 +35,7 @@ type fizzbuzz struct {
 	bz   func(int) bool
 }
 
-func (fb *fizzbuzz) Fizz(i int) string {
+func (fb *fizzbuzz) FizzBuzz(i int) string {
 	if fb.fzbz(i) {
 		return FizzBuzz
 	} else if fb.fz(i) {
@@ -84,10 +84,10 @@ func bzClassic(i int) bool {
 func main() {
 	n := 15
 	fb := FizzBuzzClassic{}
-	resClassic := fb.Fizz(n)
+	resClassic := fb.FizzBuzz(n)
 
 	fb2 := NewFizzBuzz(fzbzClassic, fzClassic, bzClassic)
-	res2 := fb2.Fizz(n)
+	res2 := fb2.FizzBuzz(n)
 
 	fmt.Println(resClassic)
 	fmt.Println(res2)
