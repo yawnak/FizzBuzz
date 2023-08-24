@@ -82,6 +82,18 @@ func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizz
 	}
 }
 
+func fzbzClassic(i int) bool {
+	return i%15 == 0
+}
+
+func fzClassic(i int) bool {
+	return i%3 == 0
+}
+
+func bzClassic(i int) bool {
+	return i%5 == 0
+}
+
 func main() {
 	fb := FizzBuzzClassic{}
 	fmt.Println(fb.Fizz(20))
