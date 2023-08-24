@@ -43,7 +43,7 @@ type fizzbuzz struct {
 	bz   func(int) bool
 }
 
-func (fb *fizzbuzz) FizzBuzz(n int) string {
+func (fb *fizzbuzz) Fizz(n int) string {
 	answerList := make([]string, 0, n)
 	for i := 1; i <= n; i++ {
 		if fb.fzbz(i) {
