@@ -18,20 +18,6 @@ type FizzBuzzer interface {
 	FizzBuzz(n int) string
 }
 
-type FizzBuzzClassic struct {
-}
-
-func (FizzBuzzClassic) FizzBuzz(i int) string {
-	if i%15 == 0 {
-		return FizzBuzz
-	} else if i%3 == 0 {
-		return Fizz
-	} else if i%5 == 0 {
-		return Buzz
-	}
-	return strconv.Itoa(i)
-}
-
 // FizzBuzzModular recieves 3 functions that will determine output of FizzBuzz
 type FizzBuzzModular struct {
 	//fzbz recieves int and returns bool if int is FizzBuzz
