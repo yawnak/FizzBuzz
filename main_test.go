@@ -1,12 +1,21 @@
 package main
 
-import "testing"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"testing"
+)
 
-func TestFizzBuzz(t *testing.T) {
+// Simple test of FizzBuzzModular
+func TestFizzBuzzModularClassic(t *testing.T) {
+	//case struct
 	type Case struct {
 		input  int
 		output string
 	}
+	//test data
 	cases := []Case{
 		{1, "1"},
 		{3, Fizz},
@@ -14,8 +23,9 @@ func TestFizzBuzz(t *testing.T) {
 		{15, FizzBuzz},
 	}
 
-	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
+	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic) //create classic fizzbuzzer
 
+	//check fizzbuzzer against test data
 	for _, c := range cases {
 		assert := fb.FizzBuzz(c.input)
 		if assert != c.output {
@@ -24,7 +34,9 @@ func TestFizzBuzz(t *testing.T) {
 	}
 }
 
+// Simple test of incremental FizzBuzzIterator
 func TestIncrementalFizzBuzzIterator(t *testing.T) {
+	//test data
 	input := 20
 	output := []string{
 		"1", "2", "Fizz", "4", "Buzz",
@@ -33,9 +45,11 @@ func TestIncrementalFizzBuzzIterator(t *testing.T) {
 		"16", "17", "Fizz", "19", "Buzz",
 	}
 
+	//create incrementalfizzbuzziterator
 	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
 	fbIterator := NewIncrementalFizzBuzzIterator(fb)
 
+	//check output slice against test data
 	assert := fbIterator.Iterate(input)
 	for i, v := range output {
 		if assert[i] != v {
