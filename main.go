@@ -82,19 +82,34 @@ func bzClassic(i int) bool {
 }
 
 type Iteratorer interface {
-	Iterate(int) []string
+	Iterate(int)
+	Scan() string
+	Next() bool
 }
 
 type IncrementalFizzBuzzIterator struct {
-	fb FizzBuzzer
+	curidx int
+	n      int
+	curval string
+	fb     FizzBuzzer
 }
 
-func (iterator IncrementalFizzBuzzIterator) Iterate(n int) []string {
-	result := make([]string, 0, n)
-	for i := 1; i <= n; i++ {
-		result = append(result, iterator.fb.FizzBuzz(i))
+func (iterator *IncrementalFizzBuzzIterator) Iterate(n int) {
+	iterator.curidx = 1
+	iterator.n = n
+}
+
+func (iterator *IncrementalFizzBuzzIterator) Next() bool {
+	if iterator.curidx > iterator.n {
+		return false
 	}
-	return result
+	iterator.curval = iterator.fb.FizzBuzz(iterator.curidx)
+	iterator.curidx += 1
+	return true
+}
+
+func (iterator IncrementalFizzBuzzIterator) Scan() string {
+	return iterator.curval
 }
 
 func NewIncrementalFizzBuzzIterator(fb FizzBuzzer) IncrementalFizzBuzzIterator {
@@ -113,7 +128,12 @@ func main() {
 
 	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
 	fbIncremental := NewIncrementalFizzBuzzIterator(fb)
-	answer := fbIncremental.Iterate(n)
+	fbIncremental.Iterate(n)
 
-	fmt.Println(strings.Join(answer, ","))
+	builder := strings.Builder{}
+	for fbIncremental.Next() {
+		builder.WriteString(fbIncremental.Scan())
+		builder.WriteString(",")
+	}
+	fmt.Print(builder.String()[:builder.Len()-1])
 }

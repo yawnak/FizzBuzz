@@ -50,10 +50,13 @@ func TestIncrementalFizzBuzzIterator(t *testing.T) {
 	fbIterator := NewIncrementalFizzBuzzIterator(fb)
 
 	//check output slice against test data
-	assert := fbIterator.Iterate(input)
+	fbIterator.Iterate(input)
 	for i, v := range output {
-		if assert[i] != v {
-			t.Errorf("error on output #%d, expected %s, got %s", i, v, assert[i])
+		//check if iterator has next value
+		if !fbIterator.Next() {
+			t.Errorf("error, iterator has no value when expected %s", v)
+		} else if fbIterator.Scan() != v {
+			t.Errorf("error on output #%d, expected %s, got %s", i, v, fbIterator.Scan())
 		}
 	}
 }
@@ -126,15 +129,16 @@ func TestIncrementalFizzBuzzIteratorWithData(t *testing.T) {
 	//create iterator
 	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic) //classic fizzbuzzer
 	fbIterator := NewIncrementalFizzBuzzIterator(fb)
-	assert := fbIterator.Iterate(n) //do iterations
+	fbIterator.Iterate(n) //do iterations
 
 	// Iterate over each line and print
 	i := 0
 	for scanner.Scan() {
 		output := scanner.Text()
-		//fmt.Println(output, assert[i])
-		if output != assert[i] {
-			t.Errorf("wrong value, expected %s, got %s", output, assert)
+		if !fbIterator.Next() {
+			t.Errorf("iterator has no value, expected %s", output)
+		} else if output != fbIterator.Scan() {
+			t.Errorf("wrong value, expected %s, got %s", output, fbIterator.Scan())
 		}
 		i++
 	}
