@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestSimpleTestFizzBuzz(t *testing.T) {
+func TestFizzBuzz(t *testing.T) {
 	type Case struct {
 		input  int
 		output string
