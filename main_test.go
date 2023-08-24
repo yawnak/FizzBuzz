@@ -14,7 +14,7 @@ func TestSimpleTestFizzBuzz(t *testing.T) {
 		{15, FizzBuzz},
 	}
 
-	fb := NewFizzBuzz(fzbzClassic, fzClassic, bzClassic)
+	fb := NewFizzBuzzModular(fzbzClassic, fzClassic, bzClassic)
 
 	for _, c := range cases {
 		assert := fb.FizzBuzz(c.input)
