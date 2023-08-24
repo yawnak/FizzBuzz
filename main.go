@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Fizz Buzz constants
 const (
 	Fizz     = "Fizz"
 	Buzz     = "Buzz"
@@ -31,12 +32,19 @@ func (FizzBuzzClassic) FizzBuzz(i int) string {
 	return strconv.Itoa(i)
 }
 
+// FizzBuzzModular recieves 3 functions that will determine output of FizzBuzz
 type FizzBuzzModular struct {
+	//fzbz recieves int and returns bool if int is FizzBuzz
 	fzbz func(int) bool
-	fz   func(int) bool
-	bz   func(int) bool
+	//fz recieves int and returns bool if int is Fizz
+	fz func(int) bool
+	//bz recieves int and returns bool if int is Buzz
+	bz func(int) bool
 }
 
+// FizzBuzz implements FizzBuzzer interface
+// It checks i against fzbz, fz, and bz and returns FizzBuzz, Fizz or Buzz respectively.
+// Or it returns i as a string if all checks fail.
 func (fb FizzBuzzModular) FizzBuzz(i int) string {
 	if fb.fzbz(i) {
 		return FizzBuzz
@@ -48,6 +56,7 @@ func (fb FizzBuzzModular) FizzBuzz(i int) string {
 	return strconv.Itoa(i)
 }
 
+// FizzBuzzModular constructor. If a function is nil, it will replace it with a function that always returns false.
 func NewFizzBuzzModular(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) FizzBuzzModular {
 	if fzbz == nil {
 		fzbz = func(i int) bool {
@@ -71,14 +80,17 @@ func NewFizzBuzzModular(fzbz func(int) bool, fz func(int) bool, bz func(int) boo
 	}
 }
 
+// classic implementation of fzbz func. Returns true if i is divisible by 15
 func fzbzClassic(i int) bool {
 	return i%15 == 0
 }
 
+// classic implementation of fz function. Returns true if i is divisible by 3
 func fzClassic(i int) bool {
 	return i%3 == 0
 }
 
+// classic implementation of bz function. Returns true if i is divisible by 5
 func bzClassic(i int) bool {
 	return i%5 == 0
 }
