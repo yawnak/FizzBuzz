@@ -81,6 +81,28 @@ func bzClassic(i int) bool {
 	return i%5 == 0
 }
 
+type Iteratorer interface {
+	Iterate(int) []string
+}
+
+type IncrementalFizzBuzzIterator struct {
+	fb FizzBuzzer
+}
+
+func (iterator IncrementalFizzBuzzIterator) Iterate(n int) []string {
+	result := make([]string, 0, n)
+	for i := 1; i <= n; i++ {
+		result = append(result, iterator.fb.FizzBuzz(i))
+	}
+	return result
+}
+
+func NewIncrementalFizzBuzzIterator(fb FizzBuzzer) IncrementalFizzBuzzIterator {
+	return IncrementalFizzBuzzIterator{
+		fb: fb,
+	}
+}
+
 func main() {
 	n := 15
 	fb := FizzBuzzClassic{}
