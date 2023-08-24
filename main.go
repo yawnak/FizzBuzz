@@ -66,12 +66,12 @@ func NewFizzBuzz(fzbz func(int) bool, fz func(int) bool, bz func(int) bool) fizz
 		}
 	}
 	if fz == nil {
-		fzbz = func(i int) bool {
+		fz = func(i int) bool {
 			return false
 		}
 	}
 	if bz == nil {
-		fzbz = func(int) bool {
+		bz = func(int) bool {
 			return false
 		}
 	}
